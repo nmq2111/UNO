@@ -50,13 +50,75 @@ UNO is a fast card game where players match cards by color or number to get rid 
 
 ## 🛠️ Functions Used
 
-You can use JavaScript functions like:
+It features **one human player** competing against a **computer bot**.
 
-- `Ramdom()` – cards randomly
-- `Cards()` – 13 cards to player and computer
-- `drawCard(player)` – Lets a player draw a card from deck
-- `ADD(player, card)` – Add a chosen card
-- `checkHandValidity(hand)` – Checks if the hand has valid sets/sequences
-- `declareWinner()` – Checks both hands and decides the winner
+**Deck and Setup Functions**
+
+- **`createDeck()`**  
+  Creates a full UNO deck including colored cards (0–9), action cards (Skip, Reverse, Draw Two), and wild cards (Wild, Wild Draw Four).
+
+- **`shuffleDeck(deck)`**  
+  Randomly shuffles the deck to ensure a fair game.
+
+- **`dealCards(players, deck)`**  
+  Deals 7 cards to each player (the human and the computer) from the shuffled deck.
+
+- **`startGame()`**  
+  Initializes the game by creating and shuffling the deck, dealing cards, and starting the first turn.
+
+---
+
+**Player Functions**
+
+- **`playCard(player, card)`**  
+  Allows the player to play a card if it matches the top card’s color, number, or type.
+
+- **`drawCard(player, deck)`**  
+  Lets the player draw a card from the deck when no playable card is available.
+
+- **`passTurn()`**  
+  Passes the player's or bot’s turn if they have no playable card even after drawing.
+
+- **`checkUno(player)`**  
+  Checks if a player has exactly one card left, requiring them to say "UNO".
+
+- **`checkWin(player)`**  
+  Checks if a player has no cards left, declaring them the winner.
+
+---
+
+**Bot (Computer) Functions**
+
+- **`botPlayTurn()`**  
+  Automates the computer's turn: plays a valid card if possible, otherwise draws a card.
+
+- **`botChooseColor()`**  
+  Automatically selects a color when the bot plays a Wild card (usually the color the bot has most cards of).
+
+- **`botDrawCard()`**  
+  Makes the bot draw a card when no valid card is available to play.
+
+---
+
+**Turn and Rule Functions**
+
+- **`isValidPlay(card, topCard)`**  
+  Validates if a played card is allowed based on the top card's color, number, or type.
+
+- **`nextPlayer()`**  
+  Advances the turn to the next player (handles turn order and Reverse cards).
+
+- **`handleActionCard(card)`**  
+  Applies the effect of special cards (Skip, Reverse, Draw Two, Wild, Wild Draw Four).
+
+---
+
+**UI and Message Functions**
+
+- **`updateUI()`**  
+  Updates the visual display to reflect the current game state (player hands, top card, turn indicator).
+
+- **`displayMessage(message)`**  
+  Displays game notifications such as "Player Skipped", "Bot drew 2 cards", or "Choose a color".
 
 ---
