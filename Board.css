@@ -10,7 +10,7 @@ body {
 }
 
 .board {
-  width: 9vw;
+  width: 90vw;
   height: 80vh;
   background-color: #eee;
   border: 1px solid black;
@@ -26,8 +26,8 @@ body {
 .index,
 .Add,
 .Remaining {
-  width: 70px;
-  height: 100px;
+  width: 9vw;
+  height: 13vh;
   background-color: #eee;
   border: 1px solid black;
   display: flex;

@@ -1,22 +1,62 @@
 //Deck and Setup Functions
-
-let index = document.querySelector('.index')
-let board = document.querySelector('.board')
-let Add = document.querySelector('.Add')
-const colors = ['red', 'blue', 'green', 'yellow']
-let deck = []
 //createDesk()
+function createDeck() {
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('Card.html')
+      .then((response) => response.text())
+      .then((data) => {
+        const tempDiv = document.createElement('div')
+        tempDiv.innerHTML = data
 
-function createDeck(color, value) {
-  const hand = document.getElementById('player-hand')
+        const cardElement = tempDiv.querySelectorAll('.Card')
+        const board = document.querySelector('.board')
 
-  const card = document.createElement('div')
-  card.classList.add('card', color) // example: card red
-  card.innerHTML = `<div class="value">${value}</div>`
+        cardElement.forEach((card) => {
+          board.appendChild(card.cloneNode(true))
+        })
+      })
+      .catch((error) => console.error('Error fetching card data:', error))
+  })
 }
 
-//shuffleDesk()
+//RandomDesk()
+function RandomDesk() {
+  const cards = Array.from(document.querySelectorAll('.board .Card'))
+  const playerHand = []
+  const computerHand = []
 
-//dealCards(players , desk)
+  for (let i = 0; i < 7; i++) {
+    //playerHand
+    const randomIndex = Math.floor(Math.random() * cards.length)
+    playerHand.push(cards[randomIndex].cloneNode(true))
+    cards.splice(randomIndex, 1)
 
-//startGame()
+    //computer Hand
+    const compIndex = Math.floor(Math.random() * cards.length)
+    computerHand.push(cards[compIndex].cloneNode(true))
+    cards.splice(compIndex, 1)
+  }
+
+  const playerArea = document.querySelector('.PlayerHand')
+  const computerArea = document.querySelector('.ComputerHand')
+
+  playerHand.forEach((card) => playerArea.appendChild(card))
+  computerHand.forEach((card) => computerArea.appendChild(card))
+}
+
+// function StartGame() {
+//   // Clear the board and hands
+//   document.querySelector('.board').innerHTML = ''
+//   document.querySelector('.player-hand').innerHTML = ''
+//   document.querySelector('.computer-hand').innerHTML = ''
+
+//   createDeck()
+//   RandomDesk()
+
+//   console.log('Game has started!')
+// }
+
+createDeck()
+RandomDesk()
+console.log('Game has started!')
+alert('Hello')
