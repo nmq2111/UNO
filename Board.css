@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.board {
+  width: 80vw;
+  height: 70vh;
+  background-color: #eee;
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.cards-index {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.index,
+.Add {
+  width: 70px;
+  height: 100px;
+  background-color: #eee;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.Add {
+  font-size: 32px;
+}

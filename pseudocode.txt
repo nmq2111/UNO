@@ -1,0 +1,121 @@
+PSEUDOCODE – RUMMY GAME (PLAYER VS COMPUTER)
+-------------------------------------------------------
+
+SETUP FUNCTIONS
+-------------------------------------------------------
+
+Deck Functions 
+
+    // Create a standard deck (52 cards + Jokers)
+    CREATE array of all 52 cards + jokers
+    RETURN shuffled deck
+
+FUNCTION Cards():
+    // Deal 13 cards to each player (player and computer)
+    FOR i = 0 TO 12:
+        GIVE 1 card to player from shuffled deck
+        GIVE 1 card to computer from shuffled deck
+    SET remaining cards as draw pile
+    MOVE top card of draw pile to discard pile
+
+-------------------------------------------------------
+
+GAME LOOP
+-------------------------------------------------------
+
+WHILE game is not over:
+
+    DISPLAY player hand on screen
+
+    // PLAYER TURN
+    PROMPT player to choose:
+        - Pick card from deck
+        - Pick card from discard pile
+
+    IF deck selected:
+        CALL drawCard("player")
+    ELSE IF discard pile selected:
+        TAKE top card from discard pile
+
+    CALL ADD("player", drawnCard)
+
+    PROMPT player to discard one card
+    REMOVE selected card from hand
+    PLACE it on top of discard pile
+
+    IF player clicks "Complete":
+        IF checkHandValidity(playerHand) == TRUE:
+            IF totalPointsGrouped(playerHand) >= 30 OR NOT firstRound:
+                CALL declareWinner("player")
+                END GAME
+            ELSE:
+                DISPLAY "Minimum 30 points needed in first round"
+        ELSE:
+            DISPLAY "Invalid Hand!"
+
+    // COMPUTER TURN
+    IF discard pile top is useful for computer:
+        TAKE top discard
+    ELSE:
+        CALL drawCard("computer")
+
+    DECIDE card to discard (basic AI strategy)
+    PLACE card on top of discard pile
+
+    IF checkHandValidity(computerHand) == TRUE:
+        IF totalPointsGrouped(computerHand) >= 30 OR NOT firstRound:
+            CALL declareWinner("computer")
+            END GAME
+
+-------------------------------------------------------
+
+FUNCTIONS (Detailed)
+-------------------------------------------------------
+
+FUNCTION drawCard(player):
+    REMOVE top card from draw pile
+    RETURN that card to the calling function
+
+FUNCTION ADD(player, card):
+    ADD the drawn card to the player’s hand array
+    UPDATE UI to show new card
+
+FUNCTION checkHandValidity(hand):
+    FIND all possible groupings (sets and sequences)
+    CHECK if:
+        - At least 2 valid sequences exist
+        - One is a pure sequence (no Joker)
+        - Other cards are in valid sets/sequences
+    RETURN TRUE if all rules are satisfied
+    ELSE RETURN FALSE
+
+FUNCTION totalPointsGrouped(hand):
+    CALCULATE total value of all grouped cards (ignore ungrouped)
+    FACE CARDS = 10, ACE = 1, NUMBER = card value
+    RETURN the sum
+
+FUNCTION declareWinner(player):
+    DISPLAY message: "[player] has declared a valid hand and wins!"
+    HIGHLIGHT winner hand
+    DISABLE further actions
+    OFFER restart button
+
+-------------------------------------------------------
+
+OTHER LOGIC (Optional Enhancements)
+-------------------------------------------------------
+
+- FUNCTION isUsefulCard(card, hand):
+    RETURN TRUE if card helps form a sequence or set
+
+- FUNCTION aiChooseDiscard(hand):
+    DISCARD card that does not help form a valid group
+    AVOID discarding wild jokers or useful cards
+
+- UI Buttons:
+    [Pick from Deck] → triggers drawCard()
+    [Pick from Discard] → selects discard pile top card
+    [Discard] → moves selected card to discard pile
+    [Complete] → triggers checkHandValidity()
+
+-------------------------------------------------------
