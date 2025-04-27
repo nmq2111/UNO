@@ -50,75 +50,52 @@ UNO is a fast card game where players match cards by color or number to get rid 
 
 ## 🛠️ Functions Used
 
-It features **one human player** competing against a **computer bot**.
+### Core Setup
 
-**Deck and Setup Functions**
+- `initializeGame()` → Start a new game.
+- `createDeck()` → Create the full deck of UNO cards.
+- `shuffleDeck(deck)` → Shuffle the deck randomly.
+- `dealCards(player, computer, deck)` → Deal 7 cards to each.
 
-- **`createDeck()`**  
-  Creates a full UNO deck including colored cards (0–9), action cards (Skip, Reverse, Draw Two), and wild cards (Wild, Wild Draw Four).
+### Gameplay
 
-- **`shuffleDeck(deck)`**  
-  Randomly shuffles the deck to ensure a fair game.
+- `startTurn(player)` → Handle player’s turn.
+- `startComputerTurn()` → Handle computer’s turn.
+- `playCard(playerOrComputer, card)` → Play a selected card.
+- `drawCard(playerOrComputer)` → Draw a card from the deck.
+- `checkPlayable(card, topCard)` → Validate if a card can be played.
+- `endTurn()` → Switch to the next turn.
 
-- **`dealCards(players, deck)`**  
-  Deals 7 cards to each player (the human and the computer) from the shuffled deck.
+### Special Cards
 
-- **`startGame()`**  
-  Initializes the game by creating and shuffling the deck, dealing cards, and starting the first turn.
+- `applySkip()` → Skip next turn.
+- `applyReverse()` → Reverse direction (acts as skip in 2-player).
+- `applyDrawTwo()` → Make opponent draw two cards.
+- `applyWild(playerOrComputer)` → Pick a color when playing a wild card.
+- `applyWildDrawFour(playerOrComputer)` → Pick color + opponent draws four.
 
----
+### Computer AI
 
-**Player Functions**
+- `computerPlayCard()` → Choose the best card to play.
+- `computerChooseColor()` → Choose the best color for Wild cards.
+- `computerDrawIfNeeded()` → Draw a card if no playable card is available.
 
-- **`playCard(player, card)`**  
-  Allows the player to play a card if it matches the top card’s color, number, or type.
+### UNO Rules
 
-- **`drawCard(player, deck)`**  
-  Lets the player draw a card from the deck when no playable card is available.
+- `sayUNO(playerOrComputer)` → Call UNO when one card left.
+- `checkWinner(playerOrComputer)` → Check if someone has won.
 
-- **`passTurn()`**  
-  Passes the player's or bot’s turn if they have no playable card even after drawing.
+### UI Functions
 
-- **`checkUno(player)`**  
-  Checks if a player has exactly one card left, requiring them to say "UNO".
+- `renderPlayerHand()` → Show player’s hand.
+- `renderComputerHand()` → Show computer’s cards (face down).
+- `renderTopCard()` → Show the current card on top of the discard pile.
+- `updateTurnDisplay()` → Show whose turn it is.
+- `displayMessage(message)` → Display actions like skips, draws, etc.
 
-- **`checkWin(player)`**  
-  Checks if a player has no cards left, declaring them the winner.
+### Utilities
 
----
-
-**Bot (Computer) Functions**
-
-- **`botPlayTurn()`**  
-  Automates the computer's turn: plays a valid card if possible, otherwise draws a card.
-
-- **`botChooseColor()`**  
-  Automatically selects a color when the bot plays a Wild card (usually the color the bot has most cards of).
-
-- **`botDrawCard()`**  
-  Makes the bot draw a card when no valid card is available to play.
-
----
-
-**Turn and Rule Functions**
-
-- **`isValidPlay(card, topCard)`**  
-  Validates if a played card is allowed based on the top card's color, number, or type.
-
-- **`nextPlayer()`**  
-  Advances the turn to the next player (handles turn order and Reverse cards).
-
-- **`handleActionCard(card)`**  
-  Applies the effect of special cards (Skip, Reverse, Draw Two, Wild, Wild Draw Four).
-
----
-
-**UI and Message Functions**
-
-- **`updateUI()`**  
-  Updates the visual display to reflect the current game state (player hands, top card, turn indicator).
-
-- **`displayMessage(message)`**  
-  Displays game notifications such as "Player Skipped", "Bot drew 2 cards", or "Choose a color".
+- `nextPlayer()` → Change current player.
+- `checkDeckEmpty()` → Reshuffle discard pile if deck runs out.
 
 ---
