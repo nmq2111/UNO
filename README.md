@@ -75,7 +75,7 @@ UNO is a fast card game where players match cards by color or number to get rid 
 
 ### isValidMove(card, topCard)
 
-- Purpose: Checks if the card being played matches the top card (by color, number, or type).
+- Purpose: Checks if the card being played matches the top card (by color, number, or type)
 
 - Usage: Called to ensure the player's move is valid.
 
