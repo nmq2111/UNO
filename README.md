@@ -50,52 +50,74 @@ UNO is a fast card game where players match cards by color or number to get rid 
 
 ## 🛠️ Functions Used
 
-### Core Setup
+### createDeck()
 
-- `initializeGame()` → Start a new game.
-- `createDeck()` → Create the full deck of UNO cards.
-- `shuffleDeck(deck)` → Shuffle the deck randomly.
-- `dealCards(player, computer, deck)` → Deal 7 cards to each.
+- Purpose: Creates the full UNO deck (numbers, colors, action, and wild cards).
 
-### Gameplay
+- Usage: Called at the start of the game to initialize the deck.
 
-- `startTurn(player)` → Handle player’s turn.
-- `startComputerTurn()` → Handle computer’s turn.
-- `playCard(playerOrComputer, card)` → Play a selected card.
-- `drawCard(playerOrComputer)` → Draw a card from the deck.
-- `checkPlayable(card, topCard)` → Validate if a card can be played.
-- `endTurn()` → Switch to the next turn.
+### shuffle(deck)
 
-### Special Cards
+- Purpose: Shuffles the cards in the deck randomly.
+- Usage: Called after creating the deck to randomize the order of the cards.
 
-- `applySkip()` → Skip next turn.
-- `applyReverse()` → Reverse direction (acts as skip in 2-player).
-- `applyDrawTwo()` → Make opponent draw two cards.
-- `applyWild(playerOrComputer)` → Pick a color when playing a wild card.
-- `applyWildDrawFour(playerOrComputer)` → Pick color + opponent draws four.
+### drawCard(playerHand, deck)
 
-### Computer AI
+- Purpose: Draws a card from the deck into the player's hand (or computer's hand).
 
-- `computerPlayCard()` → Choose the best card to play.
-- `computerChooseColor()` → Choose the best color for Wild cards.
-- `computerDrawIfNeeded()` → Draw a card if no playable card is available.
+- Usage: Called when a player or computer needs to draw a card (if no valid cards can be played).
 
-### UNO Rules
+### playCard(card, topCard, playerHand)
 
-- `sayUNO(playerOrComputer)` → Call UNO when one card left.
-- `checkWinner(playerOrComputer)` → Check if someone has won.
+- Purpose: Places a card from the player's hand onto the board, if it is a valid move.
 
-### UI Functions
+- Usage: Called when the player or computer plays a card.
 
-- `renderPlayerHand()` → Show player’s hand.
-- `renderComputerHand()` → Show computer’s cards (face down).
-- `renderTopCard()` → Show the current card on top of the discard pile.
-- `updateTurnDisplay()` → Show whose turn it is.
-- `displayMessage(message)` → Display actions like skips, draws, etc.
+### isValidMove(card, topCard)
 
-### Utilities
+- Purpose: Checks if the card being played matches the top card (by color, number, or type).
 
-- `nextPlayer()` → Change current player.
-- `checkDeckEmpty()` → Reshuffle discard pile if deck runs out.
+- Usage: Called to ensure the player's move is valid.
+
+### nextTurn(playerTurn)
+
+- Purpose: Switches between the player’s and computer’s turn.
+- Usage: Called after each player completes their move.
+
+### handleSpecialCard(card)
+
+- Purpose: Handles the special actions of cards like Skip, Reverse, +2, and Wild cards.
+
+- Usage: Called when a special card is played to trigger its effect (e.g., skipping the next player, reversing the order).
+
+### computerTurn(playerHand, topCard, deck)
+
+- Purpose: Executes the computer's turn. The computer plays a valid card or draws from the deck if it has no valid moves.
+
+- Usage: Called on the computer's turn.
+
+### getBestMove(playerHand, topCard)
+
+- Purpose: Determines the best card for the computer to play (chooses wild cards, special action cards, or a matching number/color).
+
+- Usage: Used within computerTurn() to decide the computer's move.
+
+### checkUno(playerHand)
+
+- Purpose: Checks if the player has only one card left and needs to say "UNO".
+
+- Usage: Called when the player has one card left.
+
+### checkWin(playerHand)
+
+- Purpose: Checks if the player or computer has no cards left, thus winning the game.
+
+- Usage: Called after each turn to check for a win.
+
+### startGame()
+
+- Purpose: Initializes the game by creating the deck, shuffling it, and dealing 7 cards to each player.
+
+- Usage: Called to start the game.
 
 ---

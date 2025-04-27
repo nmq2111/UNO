@@ -1,23 +1,58 @@
-.container {
+body {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+  background-color: #222;
+  min-height: 100vh;
   align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
-.index {
-  width: 70px;
-  height: 100px;
-  background-color: #eee;
-  border: 1px solid black;
+.card {
+  width: 100px;
+  height: 150px;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border: 3px solid white;
+  position: relative;
+  text-transform: uppercase;
+}
+
+/* Colors for cards */
+.red {
+  background: red;
 }
 
 .blue {
-  color: blue;
+  background: blue;
+}
+
+.green {
+  background: green;
+}
+
+.yellow {
+  background: goldenrod;
+}
+
+.black {
+  background: black;
+}
+
+.Card {
+  text-align: center;
+  padding: 5px;
+}
+
+.Reverse,
+.Skip,
+.color {
+  font-size: 20px;
 }

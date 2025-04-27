@@ -1,13 +1,17 @@
-.container {
+body {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
+  background-color: #222;
+  min-height: 100vh;
   align-items: center;
-  margin-top: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
 }
 
 .board {
-  width: 80vw;
-  height: 70vh;
+  width: 95vw;
+  height: 80vh;
   background-color: #eee;
   border: 1px solid black;
   margin-bottom: 20px;
@@ -20,7 +24,8 @@
 }
 
 .index,
-.Add {
+.Add,
+.Remaining {
   width: 70px;
   height: 100px;
   background-color: #eee;
@@ -28,9 +33,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 50px;
   font-weight: bold;
   cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(189, 189, 189, 0.5);
 }
 
 .Add {
