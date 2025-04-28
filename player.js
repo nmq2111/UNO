@@ -7,24 +7,33 @@ function DrawCard() {
       if (!card) return
 
       const cardPlacement = document.querySelector('.Card-placement')
-      const currentTopCard = cardPlacement.querySelector('.card') // the card currently placed
+      const currentTopCard = cardPlacement.querySelector('.card') // save current top card
 
-      // Temporarily move card to placement
       const originalSlot = slot
-      cardPlacement.innerHTML = ''
-      cardPlacement.appendChild(card)
+
+      // 💥 Do NOT clear placement immediately
+      // Instead, temporarily remove top card and keep it
+      if (currentTopCard) {
+        cardPlacement.removeChild(currentTopCard)
+      }
+
+      cardPlacement.appendChild(card) // move player's card
 
       // Now check if valid
       if (checkUNO(card, currentTopCard)) {
-        console.log('Valid move! Card stays.')
-        // Card stays in Card-placement
+        console.log('✅ Valid move! Card stays.')
+        // Card stays
       } else {
-        console.log('Invalid move! Returning card.')
+        console.log('❌ Invalid move! Returning card...')
 
-        // Wait 500ms, then move back nicely
+        // After short delay, move card back
         setTimeout(() => {
-          cardPlacement.removeChild(card) // Remove from placement
-          originalSlot.appendChild(card) // Move back to original slot
+          cardPlacement.removeChild(card) // Remove wrong card
+          originalSlot.appendChild(card) // Return to hand
+
+          if (currentTopCard) {
+            cardPlacement.appendChild(currentTopCard) // Restore the previous card
+          }
         }, 500)
       }
     })
@@ -33,7 +42,6 @@ function DrawCard() {
 
 function checkUNO(playerCard, topCard) {
   if (!topCard) {
-    // If no top card, allow any card
     return true
   }
 
@@ -46,9 +54,8 @@ function checkUNO(playerCard, topCard) {
   return (
     playerColor === topColor ||
     playerNumber === topNumber ||
-    playerColor === 'wild'
+    playerColor === 'black'
   )
 }
 
 DrawCard()
-checkUNO()
