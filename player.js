@@ -50,4 +50,23 @@ function checkUNO(playerCard, topCard) {
   )
 }
 
+function Add() {
+  const deck = document.querySelector('.cards-container')
+  const playerHandSlots = document.querySelectorAll('.Add')
+
+  const emptySlot = Array.from(playerHandSlots).find(
+    (slot) => !slot.querySelector('.card')
+  )
+
+  if (!emptySlot) {
+    return
+  }
+
+  const topDeckCard = deck.querySelector('.card')
+  if (topDeckCard) {
+    emptySlot.appendChild(topDeckCard)
+  }
+}
+
+Add()
 DrawCard()

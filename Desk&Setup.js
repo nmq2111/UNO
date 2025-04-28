@@ -1,3 +1,8 @@
+const cardsContainer = document.querySelector('.cards-container')
+const allCards = Array.from(cardsContainer.querySelectorAll('.card'))
+const playerHand = []
+const computerHand = []
+
 function createDesk() {
   document.addEventListener('DOMContentLoaded', () => {
     fetch('Card.html')
@@ -8,7 +13,6 @@ function createDesk() {
 
         const cardElements = tempDiv.querySelectorAll('.card')
 
-        const cardsContainer = document.querySelector('.cards-container')
         cardElements.forEach((card) => {
           cardsContainer.appendChild(card.cloneNode(true))
         })
@@ -20,13 +24,7 @@ function createDesk() {
 }
 
 function RandomDesk() {
-  const cardsContainer = document.querySelector('.cards-container')
-  const allCards = Array.from(cardsContainer.querySelectorAll('.card'))
-  const playerHand = []
-  const computerHand = []
-
   if (allCards.length < 7) {
-    console.error('Not enough cards to deal!')
     return
   }
 
@@ -38,7 +36,7 @@ function RandomDesk() {
     cardsContainer.removeChild(selectedCard)
 
     const computerArea = document.querySelector('.ComputerHand')
-    computerHand.forEach((card) => {
+    computerHand.forEach(() => {
       const hiddenCard = document.createElement('div')
       hiddenCard.classList.add('card', 'back')
       computerArea.appendChild(hiddenCard)
@@ -55,7 +53,6 @@ function RandomDesk() {
   computerHand.forEach((card) => {
     computerArea.appendChild(card)
   })
-
   cardsContainer.innerHTML = ''
 }
 
