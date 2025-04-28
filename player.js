@@ -51,5 +51,4 @@ function checkUNO(playerCard, topCard) {
 }
 
 DrawCard()
-
-function checkUNO() {}
+checkUNO()
