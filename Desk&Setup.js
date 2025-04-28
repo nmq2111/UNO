@@ -1,5 +1,3 @@
-//Deck and Setup Functions
-//createDesk()
 function createDeck() {
   document.addEventListener('DOMContentLoaded', () => {
     fetch('Card.html')
@@ -8,55 +6,45 @@ function createDeck() {
         const tempDiv = document.createElement('div')
         tempDiv.innerHTML = data
 
-        const cardElement = tempDiv.querySelectorAll('.Card')
-        const board = document.querySelector('.board')
+        const allCards = Array.from(tempDiv.querySelectorAll('.card'))
 
-        cardElement.forEach((card) => {
-          board.appendChild(card.cloneNode(true))
+        if (allCards.length < 14) {
+          console.error('Not enough cards to deal!')
+          return
+        }
+
+        const playerHand = []
+        const computerHand = []
+
+        // Pick 7 cards for player and 7 for computer
+        for (let i = 0; i < 7; i++) {
+          // Player hand
+          let randomIndex = Math.floor(Math.random() * allCards.length)
+          playerHand.push(allCards[randomIndex].cloneNode(true))
+          allCards.splice(randomIndex, 1)
+
+          // Computer hand
+          randomIndex = Math.floor(Math.random() * allCards.length)
+          computerHand.push(allCards[randomIndex].cloneNode(true))
+          allCards.splice(randomIndex, 1)
+        }
+
+        // Now place cards into player index slots
+        const indexSlots = document.querySelectorAll('.index')
+        playerHand.forEach((card, idx) => {
+          if (indexSlots[idx]) {
+            indexSlots[idx].appendChild(card)
+          }
+        })
+
+        // And place computer's hand
+        const computerArea = document.querySelector('.ComputerHand')
+        computerHand.forEach((card) => {
+          computerArea.appendChild(card)
         })
       })
       .catch((error) => console.error('Error fetching card data:', error))
   })
 }
 
-//RandomDesk()
-function RandomDesk() {
-  const cards = Array.from(document.querySelectorAll('.board .Card'))
-  const playerHand = []
-  const computerHand = []
-
-  for (let i = 0; i < 7; i++) {
-    //playerHand
-    const randomIndex = Math.floor(Math.random() * cards.length)
-    playerHand.push(cards[randomIndex].cloneNode(true))
-    cards.splice(randomIndex, 1)
-
-    //computer Hand
-    const compIndex = Math.floor(Math.random() * cards.length)
-    computerHand.push(cards[compIndex].cloneNode(true))
-    cards.splice(compIndex, 1)
-  }
-
-  const playerArea = document.querySelector('.PlayerHand')
-  const computerArea = document.querySelector('.ComputerHand')
-
-  playerHand.forEach((card) => playerArea.appendChild(card))
-  computerHand.forEach((card) => computerArea.appendChild(card))
-}
-
-// function StartGame() {
-//   // Clear the board and hands
-//   document.querySelector('.board').innerHTML = ''
-//   document.querySelector('.player-hand').innerHTML = ''
-//   document.querySelector('.computer-hand').innerHTML = ''
-
-//   createDeck()
-//   RandomDesk()
-
-//   console.log('Game has started!')
-// }
-
 createDeck()
-RandomDesk()
-console.log('Game has started!')
-alert('Hello')
