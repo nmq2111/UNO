@@ -1,8 +1,3 @@
-// Deck&Setup.js
-window.deck = []
-window.playerHand = []
-window.computerHand = []
-
 function createDesk() {
   document.addEventListener('DOMContentLoaded', () => {
     fetch('Card.html')
