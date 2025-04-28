@@ -43,3 +43,23 @@ body {
 .Add {
   font-size: 32px;
 }
+
+.Card-placement {
+  width: 200px;
+  height: 250px;
+  border-radius: 12px;
+  color: rgb(143, 82, 82);
+  font-weight: bold;
+  font-size: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border: 3px solid white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  background-color: white;
+}

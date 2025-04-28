@@ -1,1 +1,0 @@
-function DrawCard(playerHand, desk) {}
