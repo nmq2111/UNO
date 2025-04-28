@@ -25,7 +25,7 @@ function RandomDesk() {
   const playerHand = []
   const computerHand = []
 
-  if (allCards.length < 14) {
+  if (allCards.length < 7) {
     console.error('Not enough cards to deal!')
     return
   }
@@ -39,12 +39,13 @@ function RandomDesk() {
     allCards.splice(randomIndex, 1)
     cardsContainer.removeChild(selectedCard) // Remove from the deck
 
-    // Computer hand
-    randomIndex = Math.floor(Math.random() * allCards.length)
-    selectedCard = allCards[randomIndex]
-    computerHand.push(selectedCard)
-    allCards.splice(randomIndex, 1)
-    cardsContainer.removeChild(selectedCard) // Remove from the deck
+    // When placing computer's hand
+    const computerArea = document.querySelector('.ComputerHand')
+    computerHand.forEach((card) => {
+      const hiddenCard = document.createElement('div')
+      hiddenCard.classList.add('card', 'back') // add your back-card style
+      computerArea.appendChild(hiddenCard)
+    })
   }
 
   // Place cards into player's index slots
@@ -60,6 +61,9 @@ function RandomDesk() {
   computerHand.forEach((card) => {
     computerArea.appendChild(card)
   })
+
+  // ⭐ Clear the remaining cards from cardsContainer
+  cardsContainer.innerHTML = ''
 }
 
 createDesk()
