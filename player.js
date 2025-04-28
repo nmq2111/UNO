@@ -7,32 +7,24 @@ function DrawCard() {
       if (!card) return
 
       const cardPlacement = document.querySelector('.Card-placement')
-      const currentTopCard = cardPlacement.querySelector('.card') // save current top card
+      const currentTopCard = cardPlacement.querySelector('.card')
 
       const originalSlot = slot
 
-      // 💥 Do NOT clear placement immediately
-      // Instead, temporarily remove top card and keep it
       if (currentTopCard) {
         cardPlacement.removeChild(currentTopCard)
       }
 
-      cardPlacement.appendChild(card) // move player's card
+      cardPlacement.appendChild(card)
 
-      // Now check if valid
       if (checkUNO(card, currentTopCard)) {
-        console.log('✅ Valid move! Card stays.')
-        // Card stays
       } else {
-        console.log('❌ Invalid move! Returning card...')
-
-        // After short delay, move card back
         setTimeout(() => {
-          cardPlacement.removeChild(card) // Remove wrong card
-          originalSlot.appendChild(card) // Return to hand
+          cardPlacement.removeChild(card)
+          originalSlot.appendChild(card)
 
           if (currentTopCard) {
-            cardPlacement.appendChild(currentTopCard) // Restore the previous card
+            cardPlacement.appendChild(currentTopCard)
           }
         }, 500)
       }

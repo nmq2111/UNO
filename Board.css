@@ -45,8 +45,8 @@ body {
 }
 
 .Card-placement {
-  width: 200px;
-  height: 250px;
+  width: 20vw;
+  height: 30vh;
   border-radius: 12px;
   color: rgb(143, 82, 82);
   font-weight: bold;
