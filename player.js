@@ -30,6 +30,20 @@ function DrawCard() {
       }
     })
   })
+  const remainingBox = document.querySelector('.Remaining')
+  remainingBox.addEventListener('click', function () {
+    const card = remainingBox.querySelector('.card')
+    if (!card) return
+
+    const cardPlacement = document.querySelector('.Card-placement')
+    const currentTopCard = cardPlacement.querySelector('.card')
+
+    if (checkUNO(card, currentTopCard)) {
+      if (currentTopCard) cardPlacement.removeChild(currentTopCard)
+      remainingBox.removeChild(card)
+      cardPlacement.appendChild(card)
+    }
+  })
 }
 
 function checkUNO(playerCard, topCard) {
@@ -50,23 +64,51 @@ function checkUNO(playerCard, topCard) {
   )
 }
 
-function Add() {
-  const deck = document.querySelector('.cards-container')
-  const playerHandSlots = document.querySelectorAll('.Add')
+function ADD() {
+  const addButton = document.querySelector('.Add')
+  const remainingBox = document.querySelector('.Remaining')
 
-  const emptySlot = Array.from(playerHandSlots).find(
-    (slot) => !slot.querySelector('.card')
-  )
+  addButton.addEventListener('click', () => {
+    const newCard = document.createElement('div')
+    newCard.classList.add('card')
 
-  if (!emptySlot) {
-    return
-  }
+    const colors = ['red', 'green', 'blue', 'yellow', 'black']
+    const values = [
+      '0',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '+2',
+      'skip',
+      'reverse',
+      '+4',
+      'color'
+    ]
 
-  const topDeckCard = deck.querySelector('.card')
-  if (topDeckCard) {
-    emptySlot.appendChild(topDeckCard)
-  }
+    const color = colors[Math.floor(Math.random() * colors.length)]
+    let value
+
+    if (color === 'black') {
+      value = ['+4', 'color'][Math.floor(Math.random() * 2)]
+    } else {
+      value = values[Math.floor(Math.random() * 13)]
+    }
+
+    newCard.setAttribute('data-color', color)
+    newCard.setAttribute('data-number', value)
+    newCard.style.backgroundColor = color === 'black' ? 'gray' : color
+    newCard.textContent = value
+
+    remainingBox.innerHTML = ''
+    remainingBox.appendChild(newCard)
+  })
 }
 
-Add()
 DrawCard()
+ADD()
