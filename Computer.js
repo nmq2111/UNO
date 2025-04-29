@@ -1,70 +1,66 @@
-function checkUNO(playerCard, topCard) {
-  if (!topCard) {
-    return true
-  }
+//This class will manage the computer's hand and its actions.
 
-  const playerColor = playerCard.getAttribute('data-color')
-  const playerNumber = playerCard.getAttribute('data-number')
-
-  const topColor = topCard.getAttribute('data-color')
-  const topNumber = topCard.getAttribute('data-number')
-
-  return (
-    playerColor === topColor ||
-    playerNumber === topNumber ||
-    playerColor === 'black'
+function playCard(player, currentTopCard) {
+  const playableCards = player.hand.filter((card) =>
+    checkUNO(card, currentTopCard)
   )
-}
 
-function computerDrawCard() {
-  const deck = document.querySelector('.cards-container')
-  const allCards = Array.from(deck.querySelectorAll('.card'))
-  const computerHand = document.querySelector('.ComputerHand')
-
-  if (allCards.length === 0) return null
-
-  const randomIndex = Math.floor(Math.random() * allCards.length)
-  const card = allCards[randomIndex]
-
-  deck.removeChild(card)
-  computerHand.appendChild(card)
-
-  return card
-}
-
-function findValidComputerCard() {
-  const computerHand = document.querySelectorAll('.ComputerHand .card')
-  const topCard = document.querySelector('.Card-placement .card')
-
-  for (const card of computerHand) {
-    if (checkUNO(card, topCard)) {
-      return card
-    }
+  if (playableCards.length > 0) {
+    const cardToPlay =
+      playableCards[Math.floor(Math.random() * playableCards.length)]
+    player.hand = player.hand.filter((card) => card !== cardToPlay)
+    return cardToPlay
   }
-
   return null
 }
 
-function computerPlay() {
-  const cardPlacement = document.querySelector('.Card-placement')
-  const topCard = cardPlacement.querySelector('.card')
+function drawCard(deck) {
+  if (deck.length > 0) {
+    const drawnCard = deck.pop()
+    return drawnCard
+  }
+  return null
+}
 
-  const validCard = findValidComputerCard()
-
-  if (validCard) {
-    cardPlacement.innerHTML = ''
-    cardPlacement.appendChild(validCard)
-  } else {
-    const newCard = computerDrawCard()
-    if (newCard && checkUNO(newCard, topCard)) {
-      setTimeout(() => {
-        cardPlacement.innerHTML = ''
-        cardPlacement.appendChild(newCard)
-      }, 1000)
+function takeTurn(player, currentTopCard, deck) {
+  let playedCard = playCard(player, currentTopCard)
+  if (!playedCard) {
+    const drawnCard = drawCard(deck)
+    if (drawnCard && checkUNO(drawnCard, currentTopCard)) {
+      playedCard = drawnCard
+      player.hand.push(playedCard)
     }
+  }
+  return playedCard
+}
+
+function createDesk() {
+  for (let i = 0; i < 7; i++) {
+    player.hand.push(allCards.pop())
+    computer.hand.push(allCards.pop())
   }
 }
 
-window.addEventListener('load', () => {
-  setTimeout(computerPlay, 1000)
-})
+// Main game loop
+function playGame() {
+  let currentTopCard = null
+  let isPlayerTurn = true
+
+  function nextTurn() {
+    if (isPlayerTurn) {
+      DrawCard()
+    } else {
+      const playedCard = takeTurn(computer, currentTopCard, deck)
+      if (playedCard) {
+        currentTopCard = playedCard
+        console.log(`${computer.name} played:`, playedCard)
+      }
+    }
+    isPlayerTurn = !isPlayerTurn
+  }
+
+  nextTurn()
+}
+
+createDesk()
+playGame()
