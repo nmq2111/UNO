@@ -1,6 +1,5 @@
 function handleSpecialCard(card, currentPlayer, otherPlayer) {
   const value = card.getAttribute('data-number')
-  const color = card.getAttribute('data-color')
 
   switch (value) {
     case '+2':
@@ -18,15 +17,12 @@ function handleSpecialCard(card, currentPlayer, otherPlayer) {
 
     case '+4':
       drawCards(otherPlayer, 4)
-      skipTurn()
       chooseColor(card)
+      skipTurn()
       break
 
     case 'color':
       chooseColor(card)
-      break
-
-    default:
       break
   }
 }
@@ -45,25 +41,18 @@ function drawCards(playerArea, count) {
 }
 
 function skipTurn() {
-  console.log('Turn skipped')
+  passTurn()
 }
 
 function reverseTurns() {
-  console.log('Turn order reversed')
+  passTurn()
 }
 
 function chooseColor(card) {
   const colors = ['red', 'green', 'blue', 'yellow']
-  const chosenColor = prompt('Choose a color: red, green, blue, yellow')
-
-  if (colors.includes(chosenColor)) {
-    card.setAttribute('data-color', chosenColor)
-    card.style.backgroundColor = chosenColor
-  } else {
-    alert('Invalid color. Defaulting to red.')
-    card.setAttribute('data-color', 'red')
-    card.style.backgroundColor = 'red'
-  }
+  const randomColor = colors[Math.floor(Math.random() * colors.length)]
+  card.setAttribute('data-color', randomColor)
+  card.style.backgroundColor = randomColor
 }
 
 let currentPlayer = 'player'
@@ -71,7 +60,8 @@ let currentPlayer = 'player'
 function passTurn() {
   if (currentPlayer === 'player') {
     currentPlayer = 'computer'
-    setTimeout(computerPlay, 1000)
+
+    setTimeout(computerPlay, 2000)
   } else {
     currentPlayer = 'player'
   }
