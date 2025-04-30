@@ -73,22 +73,6 @@ function computerPlay() {
   setTimeout(passTurn, 1500)
 }
 
-function dealComputerCards(count = 7) {
-  const deck = document.querySelector('.cards-container')
-  const computerHand = document.querySelector('.ComputerHand')
-  const allCards = Array.from(deck.querySelectorAll('.card'))
-  console.log('Initial deck size:', allCards.length)
-
-  for (let i = 0; i < count && allCards.length > 0; i++) {
-    const card = allCards.shift()
-    deck.removeChild(card)
-    computerHand.appendChild(card)
-    console.log('Card moved to computer:', card)
-  }
-
-  console.log('Computer dealt', count, 'cards')
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   const waitForDeck = setInterval(() => {
     const deck = document.querySelector('.cards-container')
@@ -98,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(waitForDeck)
       console.log('Deck is ready with cards:', allCards.length)
 
-      dealComputerCards()
       passTurn()
     } else {
       console.log('Waiting for deck to be ready...')

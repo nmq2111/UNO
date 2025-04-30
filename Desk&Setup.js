@@ -35,16 +35,10 @@ function RandomDesk() {
   })
 
   const computerArea = document.querySelector('.ComputerHand')
-  computerHand.forEach((card) => computerArea.appendChild(card))
 
   cardsContainer.innerHTML = ''
   allCards.forEach((card) => cardsContainer.appendChild(card))
-
-  computerHand.forEach((card) => {
-    const hiddenCard = document.createElement('div')
-    hiddenCard.classList.add('card', 'back')
-    computerArea.appendChild(hiddenCard)
-  })
+  ;('')
 }
 
 function drawRandomCard(cardList) {
