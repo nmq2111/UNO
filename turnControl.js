@@ -60,7 +60,6 @@ let currentPlayer = 'player'
 function passTurn() {
   if (currentPlayer === 'player') {
     currentPlayer = 'computer'
-
     setTimeout(computerPlay, 2000)
   } else {
     currentPlayer = 'player'

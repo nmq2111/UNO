@@ -63,3 +63,13 @@ body {
   text-transform: uppercase;
   background-color: white;
 }
+
+.card.back {
+  background-color: gray;
+  color: transparent;
+  border: 2px solid white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

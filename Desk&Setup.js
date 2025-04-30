@@ -1,14 +1,7 @@
-//Desk & Setup functions
-//this functions is the main and the base of this game
-
-//variables in both functions
 const cardsContainer = document.querySelector('.cards-container')
 
 function createDesk() {
-  // to grab cards from cards.html to the board.html
-  // SOMETHING NEW TO ME : DOMContentLoaded => It means "the page's structure (the DOM) is ready to work with"
   document.addEventListener('DOMContentLoaded', () => {
-    ;``
     fetch('Card.html')
       .then((response) => response.text())
       .then((data) => {
@@ -16,7 +9,6 @@ function createDesk() {
         tempDiv.innerHTML = data
 
         const cardElements = tempDiv.querySelectorAll('.card')
-
         cardElements.forEach((card) => {
           cardsContainer.appendChild(card.cloneNode(true))
         })
@@ -33,31 +25,31 @@ function RandomDesk() {
   const computerHand = []
 
   for (let i = 0; i < 7; i++) {
-    let randomIndex = Math.floor(Math.random() * allCards.length)
-    let selectedCard = allCards[randomIndex]
-    playerHand.push(selectedCard)
-    allCards.splice(randomIndex, 1) //!!!!!!!!!!!!!!!!
-    cardsContainer.removeChild(selectedCard)
-
-    // const computerArea = document.querySelector('.ComputerHand')
-    // computerHand.forEach(() => {
-    //   const hiddenCard = document.createElement('div')
-    //   hiddenCard.classList.add('card', 'back')
-    //   computerArea.appendChild(hiddenCard)
-    // })
+    playerHand.push(drawRandomCard(allCards))
+    computerHand.push(drawRandomCard(allCards))
   }
 
   const indexSlots = document.querySelectorAll('.index')
   playerHand.forEach((card, idx) => {
-    if (indexSlots[idx]) {
-      indexSlots[idx].appendChild(card)
-    }
+    if (indexSlots[idx]) indexSlots[idx].appendChild(card)
   })
+
   const computerArea = document.querySelector('.ComputerHand')
-  computerHand.forEach((card) => {
-    computerArea.appendChild(card)
-  })
+  computerHand.forEach((card) => computerArea.appendChild(card))
+
   cardsContainer.innerHTML = ''
+  allCards.forEach((card) => cardsContainer.appendChild(card))
+
+  computerHand.forEach((card) => {
+    const hiddenCard = document.createElement('div')
+    hiddenCard.classList.add('card', 'back')
+    computerArea.appendChild(hiddenCard)
+  })
+}
+
+function drawRandomCard(cardList) {
+  const randomIndex = Math.floor(Math.random() * cardList.length)
+  return cardList.splice(randomIndex, 1)[0]
 }
 
 createDesk()
