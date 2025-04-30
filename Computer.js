@@ -67,24 +67,10 @@ function computerPlay() {
         document.querySelector('.ComputerHand'),
         document.querySelector('.PlayerHand')
       )
-    }, 1000)
+    }, 200)
   }
 
   setTimeout(passTurn, 50)
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const waitForDeck = setInterval(() => {
-    const deck = document.querySelector('.cards-container')
-    const allCards = deck.querySelectorAll('.card')
-
-    if (allCards.length >= 14) {
-      clearInterval(waitForDeck)
-      console.log('Deck is ready with cards:', allCards.length)
-
-      passTurn()
-    } else {
-      console.log('Waiting for deck to be ready...')
-    }
-  }, 100)
-})
+passTurn()

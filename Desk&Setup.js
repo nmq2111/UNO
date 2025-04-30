@@ -34,8 +34,6 @@ function RandomDesk() {
     if (indexSlots[idx]) indexSlots[idx].appendChild(card)
   })
 
-  const computerArea = document.querySelector('.ComputerHand')
-
   cardsContainer.innerHTML = ''
   allCards.forEach((card) => cardsContainer.appendChild(card))
   ;('')
