@@ -67,7 +67,7 @@ function computerPlay() {
         document.querySelector('.ComputerHand'),
         document.querySelector('.PlayerHand')
       )
-    }, 200)
+    }, 500)
   }
 
   setTimeout(passTurn, 50)
