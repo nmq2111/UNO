@@ -90,13 +90,11 @@ function dealComputerCards(count = 7) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Wait until the deck actually contains cards
   const waitForDeck = setInterval(() => {
     const deck = document.querySelector('.cards-container')
     const allCards = deck.querySelectorAll('.card')
 
     if (allCards.length >= 14) {
-      // or however many cards you expect total
       clearInterval(waitForDeck)
       console.log('Deck is ready with cards:', allCards.length)
 
