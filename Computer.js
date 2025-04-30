@@ -70,7 +70,7 @@ function computerPlay() {
     }, 1000)
   }
 
-  setTimeout(passTurn, 1500)
+  setTimeout(passTurn, 50)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
